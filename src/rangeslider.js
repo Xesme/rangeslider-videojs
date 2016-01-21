@@ -37,18 +37,23 @@
 //----------------Load Plugin----------------//
 (function () {
     var videojsOn = function (element, eventName, func, flag) {
+        if (!element) return;
         element.addEventListener(eventName, func, flag);
     };
     var videojsOff = function (element, eventName, func, flag) {
+        if (!element) return;
         element.removeEventListener(eventName, func, flag);
     };
     var videojsAddClass = function (element, className) {
+        if (!element) return;
         element.classList.add(className);
     };
     var videojsRemoveClass = function (element, className) {
+        if (!element) return;
         element.classList.remove(className);
     };
     var videojsFindPosition = function (element) {
+        if (!element) return null;
         return element.getBoundingClientRect();
     };
 
@@ -497,7 +502,7 @@
 
 //--Charge the new Component into videojs
     var videojsSeekBar = videojs.getComponent('SeekBar');
-    videojsSeekBar.prototype.options_.children.RSTimeBar = {}; //Range Slider Time Bar
+    videojsSeekBar.prototype.options_.children.push('RSTimeBar'); //Range Slider Time Bar
 
     var videojsControlBar = videojs.getComponent('ControlBar');
     videojsControlBar.prototype.options_.children.push('ControlTimePanel'); //Panel with the time of the range slider
@@ -591,6 +596,7 @@
 
     videojsSeekRSBar.prototype.onMouseMove = function (event) {
         var left = this.calculateDistance(event);
+        if (!left) return;
 
         if (this.rs.left.pressed)
             this.setPosition(0, left);
@@ -611,6 +617,7 @@
         var writeControlTime = typeof writeControlTime != 'undefined' ? writeControlTime : true;
         //index = 0 for left side, index = 1 for right side
         var index = index || 0;
+        if (!this.rs) return false;
 
         // Position shouldn't change when handle is locked
         if (this.rs.options.locked)
@@ -708,6 +715,7 @@
         var rstbX = this.getRSTBX();
         var rstbW = this.getRSTBWidth();
         var handleW = this.getWidth();
+        if (rstbX === null || rstbW === null || handleW === null) return null;
 
         // Adjusted X and Width, so handle doesn't go outside the bar
         rstbX = rstbX + (handleW / 2);
@@ -718,12 +726,14 @@
     };
 
     videojsSeekRSBar.prototype.getRSTBWidth = function () {
-        return this.el_.offsetWidth;
+        return this.el_ && this.el_.offsetWidth;
     };
     videojsSeekRSBar.prototype.getRSTBX = function () {
+        if (!this.el_) return null;
         return videojsFindPosition(this.el_).left;
     };
     videojsSeekRSBar.prototype.getWidth = function () {
+        if (!this.rs || !this.rs.left || !this.rs.left.el_) return null;
         return this.rs.left.el_.offsetWidth;//does not matter left or right
     };
 
