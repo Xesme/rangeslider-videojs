@@ -74,7 +74,7 @@
         // TODO
     };
 
-//-- Load RangeSlider plugin in videojs
+    //-- Load RangeSlider plugin in videojs
     function RangeSlider_(options) {
         var player = this;
 
@@ -135,7 +135,7 @@
 
 
 
-//-- Plugin
+    //-- Plugin
     function RangeSlider(player, options) {
         var player = player || this;
 
@@ -162,7 +162,7 @@
         this.init();
     }
 
-//-- Methods
+    //-- Methods
     RangeSlider.prototype = {
         /*Constructor*/
         init: function () {
@@ -263,7 +263,7 @@
             var values = {}, start, end;
             start = this.start || this._getArrowValue(0);
             end = this.end || this._getArrowValue(1);
-            return {start: start, end: end};
+            return { start: start, end: end };
         },
         playBetween: function (start, end, showRS) {
             showRS = typeof showRS == 'undefined' ? true : showRS;
@@ -360,12 +360,12 @@
         },
         _checkControlTime: function (index, TextInput, timeOld) {
             var h = TextInput[0],
-                    m = TextInput[1],
-                    s = TextInput[2],
-                    newHour = h.value,
-                    newMin = m.value,
-                    newSec = s.value,
-                    obj, objNew, objOld;
+                m = TextInput[1],
+                s = TextInput[2],
+                newHour = h.value,
+                newMin = m.value,
+                newSec = s.value,
+                obj, objNew, objOld;
             index = index || 0;
 
             if (newHour != timeOld[0]) {
@@ -385,7 +385,7 @@
             }
 
             var duration = this.player.duration() || 0,
-                    durationSel;
+                durationSel;
 
             var intRegex = /^\d+$/;//check if the objNew is an integer
             if (!intRegex.test(objNew) || objNew > 60) {
@@ -410,14 +410,14 @@
             }
             if (index === 1) {
                 var oldTimeLeft = this.ctpl.el_.children,
-                        durationSelLeft = videojs.TextTrack.prototype.parseCueTime(oldTimeLeft[0].value + ":" + oldTimeLeft[1].value + ":" + oldTimeLeft[2].value);
+                    durationSelLeft = videojs.TextTrack.prototype.parseCueTime(oldTimeLeft[0].value + ":" + oldTimeLeft[1].value + ":" + oldTimeLeft[2].value);
                 if (durationSel < durationSelLeft) {
                     obj.style.border = "1px solid red";
                 }
             } else {
 
                 var oldTimeRight = this.ctpr.el_.children,
-                        durationSelRight = videojs.TextTrack.prototype.parseCueTime(oldTimeRight[0].value + ":" + oldTimeRight[1].value + ":" + oldTimeRight[2].value);
+                    durationSelRight = videojs.TextTrack.prototype.parseCueTime(oldTimeRight[0].value + ":" + oldTimeRight[1].value + ":" + oldTimeRight[2].value);
                 if (durationSel > durationSelRight) {
                     obj.style.border = "1px solid red";
                 }
@@ -429,78 +429,78 @@
     };
 
 
-//----------------Public Functions----------------//
+    //----------------Public Functions----------------//
 
-//-- Public Functions added to video-js
+    //-- Public Functions added to video-js
 
     var videojsPlayer = videojs.getComponent('Player');
 
-//Lock the Slider bar and it will not be possible to change the arrow positions
+    //Lock the Slider bar and it will not be possible to change the arrow positions
     videojsPlayer.prototype.lockSlider = function () {
         return this.rangeslider.lock();
     };
 
-//Unlock the Slider bar and it will be possible to change the arrow positions
+    //Unlock the Slider bar and it will be possible to change the arrow positions
     videojsPlayer.prototype.unlockSlider = function () {
         return this.rangeslider.unlock();
     };
 
-//Show the Slider Bar Component
+    //Show the Slider Bar Component
     videojsPlayer.prototype.showSlider = function () {
         return this.rangeslider.show();
     };
 
-//Hide the Slider Bar Component
+    //Hide the Slider Bar Component
     videojsPlayer.prototype.hideSlider = function () {
         return this.rangeslider.hide();
     };
 
-//Show the Panel with the seconds of the selection
+    //Show the Panel with the seconds of the selection
     videojsPlayer.prototype.showSliderPanel = function () {
         return this.rangeslider.showPanel();
     };
 
-//Hide the Panel with the seconds of the selection
+    //Hide the Panel with the seconds of the selection
     videojsPlayer.prototype.hideSliderPanel = function () {
         return this.rangeslider.hidePanel();
     };
 
 
-//Show the control Time to edit the position of the arrows
+    //Show the control Time to edit the position of the arrows
     videojsPlayer.prototype.showControlTime = function () {
         return this.rangeslider.showcontrolTime();
     };
 
-//Hide the control Time to edit the position of the arrows
+    //Hide the control Time to edit the position of the arrows
     videojsPlayer.prototype.hideControlTime = function () {
         return this.rangeslider.hidecontrolTime();
     };
 
-//Set a Value in second for both arrows
+    //Set a Value in second for both arrows
     videojsPlayer.prototype.setValueSlider = function (start, end) {
         return this.rangeslider.setValues(start, end);
     };
 
-//The video will be played in a selected section
+    //The video will be played in a selected section
     videojsPlayer.prototype.playBetween = function (start, end) {
         return this.rangeslider.playBetween(start, end);
     };
 
-//The video will loop between to values
+    //The video will loop between to values
     videojsPlayer.prototype.loopBetween = function (start, end) {
         return this.rangeslider.loop(start, end);
     };
 
-//Set a Value in second for the arrows
+    //Set a Value in second for the arrows
     videojsPlayer.prototype.getValueSlider = function () {
         return this.rangeslider.getValues();
     };
 
 
 
-//----------------Create new Components----------------//
+    //----------------Create new Components----------------//
 
-//--Charge the new Component into videojs
+    //--Charge the new Component into videojs
     var videojsSeekBar = videojs.getComponent('SeekBar');
     videojsSeekBar.prototype.options_.children.push('RSTimeBar'); //Range Slider Time Bar
 
@@ -509,7 +509,7 @@
 
 
 
-//-- Design the new components
+    //-- Design the new components
 
     var videojsComponent = videojs.getComponent('Component');
 
@@ -556,6 +556,7 @@
         constructor: function (player, options) {
             videojsComponent.call(this, player, options);
             this.on('mousedown', this.onMouseDown);
+            this.on('touchstart', this.onMouseDown);
         }
     });
 
@@ -586,12 +587,16 @@
         if (!this.rs.options.locked) {
             videojsOn(document, "mousemove", videojs.bind(this, this.onMouseMove));
             videojsOn(document, "mouseup", videojs.bind(this, this.onMouseUp));
+            videojsOn(document, 'touchmove', videojs.bind(this, this.onMouseMove));
+            videojsOn(document, "touchend", videojs.bind(this, this.onMouseUp));
         }
     };
 
     videojsSeekRSBar.prototype.onMouseUp = function (event) {
         videojsOff(document, "mousemove", this.onMouseMove, false);
         videojsOff(document, "mouseup", this.onMouseUp, false);
+        videojsOff(document, "touchmove", this.onMouseMove, false);
+        videojsOff(document, "touchend", this.onMouseUp, false);
     };
 
     videojsSeekRSBar.prototype.onMouseMove = function (event) {
@@ -633,12 +638,12 @@
 
         // Alias
         var ObjLeft = this.rs.left.el_,
-                ObjRight = this.rs.right.el_,
-                Obj = this.rs[index === 0 ? 'left' : 'right'].el_,
-                tpr = this.rs.tpr.el_,
-                tpl = this.rs.tpl.el_,
-                bar = this.rs.bar,
-                ctp = this.rs[index === 0 ? 'ctpl' : 'ctpr'].el_;
+            ObjRight = this.rs.right.el_,
+            Obj = this.rs[index === 0 ? 'left' : 'right'].el_,
+            tpr = this.rs.tpr.el_,
+            tpl = this.rs.tpl.el_,
+            bar = this.rs.bar,
+            ctp = this.rs[index === 0 ? 'ctpl' : 'ctpr'].el_;
 
         //Check if left arrow is passing the right arrow
         if ((index === 0 ? bar.updateLeft(left) : bar.updateRight(left))) {
@@ -658,7 +663,7 @@
 
             //-- Panel
             var TimeText = videojsFormatTime(this.rs._seconds(left)),
-                    tplTextLegth = tpl.children[0].innerHTML.length;
+                tplTextLegth = tpl.children[0].innerHTML.length;
             var MaxP, MinP, MaxDisP;
             if (tplTextLegth <= 4) //0:00
                 MaxDisP = this.player_.isFullScreen ? 3.25 : 6.5;
@@ -693,7 +698,7 @@
             //-- Control Time
             if (writeControlTime) {
                 var time = TimeText.split(":"),
-                        h, m, s;
+                    h, m, s;
                 if (time.length == 2) {
                     h = 00;
                     m = time[0];
@@ -751,6 +756,7 @@
         constructor: function (player, options) {
             videojsComponent.call(this, player, options);
             this.on('mouseup', this.onMouseUp);
+            this.on("touchend", this.onMouseUp);
             this.fired = false;
         }
     });
@@ -767,11 +773,11 @@
 
     videojsSelectionBar.prototype.onMouseUp = function () {
         var start = this.rs.left.el_.style.left.replace("%", ""),
-                end = this.rs.right.el_.style.left.replace("%", ""),
-                duration = this.player_.duration(),
-                precision = this.rs.updatePrecision,
-                segStart = videojsRound(start * duration / 100, precision),
-                segEnd = videojsRound(end * duration / 100, precision);
+            end = this.rs.right.el_.style.left.replace("%", ""),
+            duration = this.player_.duration(),
+            precision = this.rs.updatePrecision,
+            segStart = videojsRound(start * duration / 100, precision),
+            segEnd = videojsRound(end * duration / 100, precision);
         this.player_.currentTime(segStart);
         this.player_.play();
         this.rs.bar.activatePlay(segStart, segEnd);
@@ -864,6 +870,7 @@
         constructor: function (player, options) {
             videojsComponent.call(this, player, options);
             this.on('mousedown', this.onMouseDown);
+            this.on("touchstart", this.onMouseDown);
             this.pressed = false;
         }
     });
@@ -885,12 +892,14 @@
         if (!this.rs.options.locked) {
             this.pressed = true;
             videojsOn(document, "mouseup", videojs.bind(this, this.onMouseUp));
+            videojsOn(document, "touchend", videojs.bind(this, this.onMouseUp));
             videojsAddClass(this.el_, 'active');
         }
     };
 
     videojsSelectionBarLeft.prototype.onMouseUp = function (event) {
         videojsOff(document, "mouseup", this.onMouseUp, false);
+        videojsOff(document, "touchend", this.onMouseUp, false);
         videojsRemoveClass(this.el_, 'active');
         if (!this.rs.options.locked) {
             this.pressed = false;
@@ -911,6 +920,7 @@
         constructor: function (player, options) {
             videojsComponent.call(this, player, options);
             this.on('mousedown', this.onMouseDown);
+            this.on("touchstart", this.onMouseDown);
             this.pressed = false;
         }
     });
@@ -933,12 +943,14 @@
         if (!this.rs.options.locked) {
             this.pressed = true;
             videojsOn(document, "mouseup", videojs.bind(this, this.onMouseUp));
+            videojsOn(document, "touchend", videojs.bind(this, this.onMouseUp));
             videojsAddClass(this.el_, 'active');
         }
     };
 
     videojsSelectionBarRight.prototype.onMouseUp = function (event) {
         videojsOff(document, "mouseup", this.onMouseUp, false);
+        videojsOff(document, "touchend", this.onMouseUp, false);
         videojsRemoveClass(this.el_, 'active');
         if (!this.rs.options.locked) {
             this.pressed = false;
