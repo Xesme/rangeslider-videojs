@@ -131,7 +131,7 @@
         }
 
     }
-    videojs.plugin('rangeslider', RangeSlider_);
+    videojs.registerPlugin('rangeslider', RangeSlider_);
 
 
 
