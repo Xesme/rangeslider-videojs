@@ -26,7 +26,7 @@
 	background: -webkit-linear-gradient(top, #FFE800, #A69700);
 	background: -o-linear-gradient(top, #FFE800, #A69700);
 	background: -ms-linear-gradient(top, #FFE800, #A69700);
-	background: linear-gradient(top, #FFE800, #A69700);
+	background: linear-gradient(to right, #FFE800, #A69700);
 	opacity: 0.8;
 }
 
@@ -38,7 +38,7 @@
 	background: -webkit-linear-gradient(top, #FF6565, #300000);
 	background: -o-linear-gradient(top, #FF6565, #300000);
 	background: -ms-linear-gradient(top, #FF6565, #300000);
-	background: linear-gradient(top, #FF6565, #300000);
+	background: linear-gradient(to left, #FF6565, #300000);
 }
 
 
